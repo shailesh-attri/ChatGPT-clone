@@ -13,9 +13,15 @@ body{
     font-family: 'Bebas Neue', sans-serif;
 font-family: 'Poppins', sans-serif;
 background-color: rgb(11, 8, 35);
-    overflow: hidden;
+   overflow: hidden;
 }
-
+.Main-chat, .Sidebar{
+  height: calc(100vh - 50px);
+}
+.ChatBox{
+  height: calc(100vh - 150px);
+  box-shadow: none;
+}
 
 
 
@@ -42,8 +48,7 @@ background-color: rgb(11, 8, 35);
   
   .message-icon {
     /* Add any styles for the icon here */
-    width: 50px;
-    height: 35px;
+    
     color: rgb(193, 190, 190);
     background-color: transparent;
     cursor: pointer;
@@ -54,106 +59,22 @@ background-color: rgb(11, 8, 35);
   
   
   .input-field {
-    width: 900px;
-    height: 4rem;
+    
+    height: 3.7rem;
     background-color: transparent;
     border-radius: 10px; /* Remove the border if not needed */
-    padding-left: 10px; /* Adjust the padding to make space for the icon */
+    padding-left: 20px; /* Adjust the padding to make space for the icon */
     box-sizing: border-box;
     outline: none;
   }
-  .user-msg,.gpt-response
-  {
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
-   
+.hamburger{
+  display: none;
 }
 
-  @media (min-width: 1280px) and (max-width: 1536px) {
-    /* Sidebar */
-    .Sidebar {
-      width: 20%;
-      height: 100vh;
-    }
+.history:hover{
+  background-color:  #363a45;;
+}
   
-    /* Main chat */
-    .Main-chat {
-      width: 80%;
-      height: 100vh;
-
-    
-    }
-    html{
-        font-size: 62.5%;
-    }
-    .pro-version{
-        display: flex;
-        justify-content: center;
-        margin-top: 0;
-    }
-    
-    
-    /* Add any additional styling for elements in this size range */
-  }
-  @media (min-width: 1680px) and (max-width: 1920px){
-    html{
-        font-size: 80%;
-    }
-    .pro-version{
-        display: flex;
-        justify-content: center;
-        margin-top: 2rem;
-    }
-  }
-  @media (min-width: 720px) and (max-width: 1080px){
-    html{
-        font-size: 80%;
-    }
-    .pro-version{
-      padding: 10px 10px;
-        display: flex;
-        justify-content: center;
-        margin-top: 4rem;
-    }
-
-
-
-    .input-field {
-      width: 400px;
-      height: 4rem;
-      background-color: transparent;
-      border-radius: 10px; /* Remove the border if not needed */
-      padding-left: 10px; /* Adjust the padding to make space for the icon */
-      box-sizing: border-box;
-      outline: none;
-    }
-    .Sidebar{
-      width: 30%;
-    }
-    .ChatBox{
-      padding: 0;
-    }
-    .API-chat{
-      padding: 0 10px;
-    }
-  }
-  @media (min-width: 640px) and (max-width: 719px){
-    html{
-      font-size: 85%;
-  }
-    .input-field {
-      width: 300px;
-      
-    }
-    .Sidebar{
-      width: 40%;
-    }
-    .ChatBox{
-      padding: 0;
-    }
-    .API-chat{
-      padding: 0 10px;
-    }
-  }
   @media (min-width: 480px) and (max-width: 640px) {
     html{
       font-size: 65%;
@@ -189,6 +110,15 @@ background-color: rgb(11, 8, 35);
     }
     .msg{
       display: none;
+    }
+    .social{
+      display: none;
+    }
+    .right-sidebar{
+      width: 70%;
+    }
+    .hamburger{
+      display: block;
     }
   }
 @media (min-width: 340px) and (max-width: 480px){
@@ -226,5 +156,14 @@ background-color: rgb(11, 8, 35);
   }
   .msg{
     display: none;
+  }
+  .social{
+    display: none;
+  }
+  .right-sidebar .ModalSidebar {
+   width: 300px;
+  }
+  .hamburger{
+    display: block;
   }
 }

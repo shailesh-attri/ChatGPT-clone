@@ -1,109 +1,39 @@
-// // eslint-disable-next-line import/first
+import OpenAI from "openai";
 
-// const { OpenAI } = require('openai');
+const API_KEY = '';
 
-// const openai = new OpenAI({ apiKey:  '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', dangerouslyAllowBrowser: true });
+const openai = new OpenAI({
+  apiKey: API_KEY,
+  dangerouslyAllowBrowser: true,
+});
 
+export async function sendMsgToAi(userText) {
+  try {
+    const response = await openai.completions.create({
+      model: "text-davinci-003",
+      prompt: userText,
+      temperature: 0.7,
+      max_tokens: 4000,
+    });
 
+    console.log('Full API Response:', response);
+    console.log('User Input', userText)
 
-
-
-
-
-
-
-
-// async function callApi() {
-//     try {
-//       const completion = await openai.completions.create({
-//         model: "text-davinci-003",
-//         prompt: "What is API",
-//         max_tokens: 7,
-//         temperature: 0,
-//       });
-  
-//       console.log(completion.data.choices[0].text);
-//     } catch (error) {
-//       console.error('Error:', error);
-//     }
-//   }
-  
-//   callApi()
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // const { OpenAI } = require('openai');
-
-// // const openai = new OpenAI({ apiKey: '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', dangerouslyAllowBrowser: true });
-
-// // async function main() {
-// //   try {
-// //     const response = await openai.completions.create({
-// //         model: 'text-davinci-003',
-// //       engine: 'text-davinci-003',
-// //       prompt: 'Hello how are you',
-// //       max_tokens: 50, // Adjust the number of tokens as needed.
-// //       temperature: 0.7, // Adjust the temperature as needed.
-// //     });
-
-// //     console.log(response.choices[0].text);
-// //   } catch (error) {
-// //     console.error('Error:', error);
-// //   }
-// // }
-
-// // main();
-// // const {Configuration, OpenAIApi} = require('openai')
-// // const configuration = new Configuration({
-// //     apiKey: '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'
-// // })
-// // const openai = new OpenAIApi(configuration)
-// // openai.listEngines().then((res) => {
-// //     console.log(res)
-// // })
-
-// // export async function sendMsg(message){
-// //     const res = await openai.createCompletion({
-// //         model:'text-davinci-003',
-// //         prompt:message,
-// //         temperature:0.7,
-// //         max_tokens:256,
-// //         top_p:1,
-// //         frequency_penalty:0,
-// //         presence_penalty:0
-// //     })
-// //     return res.data.choices[0].text
-// // }
-// // openai.createCompletion({
-// //     model:'text-davinci-003',
-// //          prompt:"Say hello",
-// //          temperature:0,
-// //          max_tokens:7,
-// // }).then((response) => {
-// //     console.log(response.data)
-// // })
+    if (response.choices && response.choices.length > 0) {
+      const firstChoice = response.choices[0];
+      if (firstChoice && firstChoice.text) {
+        const finalResult = firstChoice.text.trim();
+        return finalResult // Trim any leading or trailing spaces
+      } else {
+        console.error('Invalid response format. Missing text in choices:', response);
+        throw new Error('Invalid response format');
+      }
+    } else {
+      console.error('Invalid response format. Missing choices:', response);
+      throw new Error('Invalid response format');
+    }
+  } catch (error) {
+    console.error('Error sending message to OpenAI:', error);
+    throw error; // Rethrow the error or handle it as needed
+  }
+}
